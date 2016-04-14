@@ -6,7 +6,7 @@ var app = express();
 var mysql = require('mysql');
 var nodemailer = require('nodemailer');
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
 	host		: 'ec2-54-213-132-214.us-west-2.compute.amazonaws.com',
 	user		: 'FixItMacServer',
 	password : 'serverpassword',
@@ -25,13 +25,13 @@ var transporter = nodemailer.createTransport("SMTP",{
    }
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
+//connection.connect(function(err) {
+//  if (err) {
+//    console.error('error connecting: ' + err.stack);
+//    return;
+//  }
+//  console.log('connected as id ' + connection.threadId);
+//});
 
 
 //=============================
