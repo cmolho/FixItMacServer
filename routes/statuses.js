@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET statuses page. */
 
-//TEST MYSQL QUERY
+//================
+// mysql functions
+//================
 
 var mysql = require('mysql');
 
@@ -40,7 +42,11 @@ function getStatusByID(id, callback) {
     });
 }
 
-app.get('/', function(req,res) {
+//================
+// express routing
+//================
+
+router.get('/', function(req,res) {
     getStatuses(function(request,response) {
         json = response;
         res.header('Access-Control-Allow-Origin', '*');
@@ -48,15 +54,13 @@ app.get('/', function(req,res) {
     });
 });
 
-app.get('/:id', function(req,res) {
+router.get('/:id', function(req,res) {
     getStatusByID(req.params.id, function(request,response) {
         json = response;
         res.header('Access-Control-Allow-Origin', '*');
         res.send(json);
     });
 });
-
-
 
 module.exports = router;
 

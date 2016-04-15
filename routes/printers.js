@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET printers page. */
 
-//TEST MYSQL QUERY
+//================
+// mysql functions
+//================
 
 var mysql = require('mysql');
 
@@ -39,6 +41,10 @@ function getPrinterByID(id, callback) {
         return callback(null,json);
     });
 }
+
+//================
+// express routing
+//================
 
 router.get('/', function(req,res) {
     getPrinters(function(request,response) {
