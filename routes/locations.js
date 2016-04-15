@@ -35,7 +35,7 @@ function getLocations(callback) {
 // express routing
 //================
 
-router.get('/locations', function(req,res) {
+router.get('/', function(req,res) {
     getLocations(function(request,response) {
         json = response;
         res.header('Access-Control-Allow-Origin', '*');
