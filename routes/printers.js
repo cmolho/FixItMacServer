@@ -88,6 +88,7 @@ router.post('/:id/setissue/:issue', function(req,res) {
     setIssue(req.params.id,req.params.issue,function(request,response) {
         json = response;
         res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Request-Methods', 'POST'); //testing for app to work
         res.send('success');
     });
 });
@@ -96,6 +97,7 @@ router.post('/:id/setworking', function(req,res) {
     setWorking(req.params.id,function(request,response) {
         json = response;
         res.header('Access-Control-Allow-Origin', '*');
+        //res.header('Access-Control-Request-Methods', 'POST');
         res.send('success');
     });
 });
