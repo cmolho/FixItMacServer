@@ -22,6 +22,10 @@ var transporter = nodemailer.createTransport("SMTP",{
 // express routing
 //================
 
+router.get('/', function(req, res, next) {
+    res.send("testing email main page");
+});
+
 router.get('/:text', function(req,res) {
     // setup e-mail data
     var mailOptions = {
