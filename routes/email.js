@@ -22,9 +22,6 @@ var transporter = nodemailer.createTransport("SMTP",{
 // express routing
 //================
 
-router.get('/', function(req, res, next) {
-    res.send("testing email main page");
-});
 
 router.get('/:text', function(req,res) {
     // setup e-mail data
@@ -40,8 +37,8 @@ router.get('/:text', function(req,res) {
             return console.log(error);
         }
         console.log('Some sort of email was sent!');
-        res.sendStatus(200); //need to send response otherwise it will continually send emails
-        res.render('index', {title:'Sent Email'});
+        //res.sendStatus(200); //need to send response otherwise it will continually send emails
+        res.render('index', {title:'Sent Email, Congrats'});
     });
 });
 
