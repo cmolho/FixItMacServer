@@ -23,7 +23,7 @@ var transporter = nodemailer.createTransport("SMTP",{
 //================
 
 
-router.get('/:text', function(req,res) {
+router.post('/:text', function(req,res) {
     // setup e-mail data
     var mailOptions = {
         from: '"FixItMac" <fixitmacalester@gmail.com>', // sender address
@@ -37,8 +37,7 @@ router.get('/:text', function(req,res) {
             return console.log(error);
         }
         console.log('Some sort of email was sent!');
-        //res.sendStatus(200); //need to send response otherwise it will continually send emails
-        res.render('index', {title:'Sent Email, Congrats'});
+        res.sendStatus(200); //need to send response otherwise it will continually send emails
     });
 });
 
