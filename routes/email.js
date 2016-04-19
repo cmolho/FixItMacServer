@@ -37,6 +37,7 @@ router.post('/:text', function(req,res) {
         }
         console.log('Some sort of email was sent!');
         res.sendStatus(200); //need to send response otherwise it will continually send emails
+        res.render('index', {title:'Sent Email'});
     });
 });
 
