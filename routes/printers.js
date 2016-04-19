@@ -92,11 +92,10 @@ router.post('/:id/setissue/:issue', function(req,res) {
     });
 });
 
-router.post('/:id/setworking', function(req,res) {
+router.get('/:id/setworking', function(req,res) {
     setWorking(req.params.id,function(request,response) {
-        json = response;
         res.header('Access-Control-Allow-Origin', '*');
-        res.send('success');
+        res.render(index, {title:"Printer Set Working"});
     });
 });
 
