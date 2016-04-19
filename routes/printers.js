@@ -95,7 +95,7 @@ router.post('/:id/setissue/:issue', function(req,res) {
 router.get('/:id/setworking', function(req,res) {
     setWorking(req.params.id,function(request,response) {
         res.header('Access-Control-Allow-Origin', '*');
-        res.render(index, {title:"Printer Set Working"});
+        res.send('successfully set printer working');
     });
 });
 
