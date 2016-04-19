@@ -95,10 +95,11 @@ router.post('/:id/setissue/:issue', function(req,res) {
 router.get('/:id/setworking', function(req,res) {
     setWorking(req.params.id,function(request,response) {
         res.header('Access-Control-Allow-Origin', '*');
-        res.send('successfully set printer working');
+        //res.send('successfully set printer working');
+        res.render('email');
+        res.sendStatus(200);
     });
 });
-
 
 
 module.exports = router;
