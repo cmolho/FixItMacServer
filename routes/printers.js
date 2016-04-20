@@ -97,7 +97,7 @@ router.get('/:id/setworking', function(req,res) {
         res.header('Access-Control-Allow-Origin', '*');
         //res.send('successfully set printer working');
         res.render('email');
-        res.sendStatus(200);
+        //res.sendStatus(200);
     });
 });
 
