@@ -23,11 +23,11 @@ var transporter = nodemailer.createTransport("SMTP",{
 //================
 
 
-router.get('/:text', function(req,res) {
+router.post('/:text/:address', function(req,res) {
     // setup e-mail data
     var mailOptions = {
         from: '"FixItMac" <fixitmacalester@gmail.com>', // sender address
-        to: ['cmolho@macalester.edu'], // list of receivers
+        to: [req.params.address], // list of receivers
         subject: 'Printer Issue Report from FixItMac' , // Subject line
         text: req.params.text   // plaintext body
     };
