@@ -37,8 +37,6 @@ router.get('/:text/:address', function(req,res) {
             return console.log(error);
         }
         console.log('Some sort of email was sent!');
-        res.header('Access-Control-Allow-Origin', '*');
-        res.send('success');
         res.sendStatus(200); //need to send response otherwise it will continually send emails
     });
 });
