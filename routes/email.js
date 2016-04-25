@@ -24,6 +24,7 @@ var transporter = nodemailer.createTransport("SMTP",{
 
 
 router.get('/:text/:address', function(req,res) {
+    res.header('Access-Control-Allow-Origin', '*');
     // setup e-mail data
     var mailOptions = {
         from: '"FixItMac" <fixitmacalester@gmail.com>', // sender address
