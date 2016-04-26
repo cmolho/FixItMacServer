@@ -54,7 +54,7 @@ function setIssue(id,issue,callback) {
 }
 
 function setIssueOther(id,description,callback) {
-    connection.query('UPDATE `printer` SET printerStatus=0 WHERE printerID=?; UPDATE `status` SET otherStatus=0,otherStatusDescription='+'changed'+' WHERE printerID=?;', [id,id], function(err, results, fields) {
+    connection.query('UPDATE `printer` SET printerStatus=0 WHERE printerID=?; UPDATE `status` SET otherStatus=0,otherStatusDescription=?? WHERE printerID=?;', [id,description,id], function(err, results, fields) {
         if (err) {
             console.log('Error while setting printer issue: ', err);
             return callback(err,null);
