@@ -107,7 +107,7 @@ router.post('/:id/setissue/otherStatus/:description', function(req,res) {
     setIssueOther(req.params.id,req.params.description, function(request,response) {
         //json = response;
         res.header('Access-Control-Allow-Origin', '*');
-        res.send('success');
+        res.send(response);
     });
 });
 
