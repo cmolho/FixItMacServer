@@ -65,13 +65,26 @@ function setIssueOther(id,description,callback) {
 }
 
 function setWorking(id,issue,callback) {
-    connection.query('UPDATE `printer` SET printerStatus=1 WHERE printerID=?; UPDATE `status` SET ??=1 WHERE printerID=?;', [id,issue,id], function(err, results, fields) {
+    connection.query('UPDATE `status` SET ??=1 WHERE printerID=?;', [issue,id], function(err, results, fields) {
         if (err) {
             console.log('Error while setting printer working: ', err);
             return callback(err,null);
         }
         console.log('Successful printer status set to 1: \tPrinter #', id);
         return callback(null,'success');
+    });
+}
+
+//// Used to check setWorking
+function getStatusByID(id, callback) {
+    connection.query('SELECT * FROM `status` WHERE printerID = ?', [id], function(err, results, fields) {
+        if (err) {
+            console.log('Error while performing status Query: ', err);
+            return callback(err,null);
+        }
+        console.log('Successful status query: \tPrinter #', id);
+        json = JSON.stringify(results[0]);
+        return callback(null,json);
     });
 }
 
@@ -123,16 +136,21 @@ router.post('/:id/setissue/otherStatus/:description', function(req,res) {
 });
 
 router.get('/:id/setworking/:issue', function(req,res) {
-    setWorking(req.params.id,req.params.issue,function(request,response) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.render('email');
+    var printer;
+    var status;
+    getPrinterByID(req.params.id, function(request,response) {
+        printer = JSON.parse(response);
+        setWorking(req.params.id,req.params.issue,function(request,response) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.render('email', {printer: printer.printerName, location: printer.printerLocation});
+        });
     });
 });
 
 router.get('/:id/setworking', function(req,res) {
     setWorkingAll(req.params.id,function(request,response) {
         res.header('Access-Control-Allow-Origin', '*');
-        res.render('email');
+        res.render('email', {printer: req.params.id});
     });
 });
 
