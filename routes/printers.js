@@ -148,9 +148,14 @@ router.get('/:id/setworking/:issue', function(req,res) {
 });
 
 router.get('/:id/setworking', function(req,res) {
-    setWorkingAll(req.params.id,function(request,response) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.render('email', {printer: req.params.id});
+    var printer;
+    var status;
+    getPrinterByID(req.params.id, function(request,response) {
+        printer = JSON.parse(response);
+        setWorkingAll(req.params.id,function(request,response) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.render('email', {printer: printer.printerName, location: printer.printerLocation});
+        });
     });
 });
 
