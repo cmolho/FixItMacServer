@@ -3,19 +3,17 @@ var router = express.Router();
 
 var nodemailer = require('nodemailer');
 
-/* POST email page. */
 
 //================
 // nodemailer functions
 //================
 
+var creds = require('./credentials.json').gmail;
+
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport("SMTP",{
     service: "Gmail",  // sets automatically host, port and connection security settings
-    auth: {
-        user: "fixitmacalester@gmail.com",
-        pass: "macalester"
-    }
+    auth: creds
 });
 
 //================
@@ -24,7 +22,6 @@ var transporter = nodemailer.createTransport("SMTP",{
 
 
 router.get('/:text/:address', function(req,res) {
-    res.header('Access-Control-Allow-Origin', '*');
     // setup e-mail data
     var mailOptions = {
         from: '"FixItMac" <fixitmacalester@gmail.com>', // sender address
@@ -37,7 +34,7 @@ router.get('/:text/:address', function(req,res) {
         if(error){
             return console.log(error);
         }
-        console.log('Some sort of email was sent!');
+        console.log('Successfully sent email.');
         res.sendStatus(200); //need to send response otherwise it will continually send emails
     });
 });

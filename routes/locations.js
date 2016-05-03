@@ -8,24 +8,18 @@ var router = express.Router();
 //================
 
 var mysql = require('mysql');
+var creds = require('./credentials.json').aws;
 
-var connection = mysql.createPool({
-    host		: 'ec2-54-213-132-214.us-west-2.compute.amazonaws.com',
-    user		: 'FixItMacServer',
-    password : 'serverpassword',
-    database : 'FixItMacDatabase',
-    port		: '3306',
-    multipleStatements: true
-});
+var connection = mysql.createPool(creds);
 
 
 function getLocations(callback) {
     connection.query('SELECT * FROM `locationCategory`',  function(err, results, fields) {
         if (err) {
-            console.log('Error while performing location Query: ', err);
-            return callback(err,null);
+            //console.log('Error while performing location Query: ', err);
+            return callback(err,'error');
         }
-        console.log('Successful location query');
+        //console.log('Successful location query');
         json = JSON.stringify(results);
         return callback(null,json);
     });
@@ -37,9 +31,9 @@ function getLocations(callback) {
 
 router.get('/', function(req,res) {
     getLocations(function(request,response) {
-        json = response;
-        res.header('Access-Control-Allow-Origin', '*');
-        res.send(json);
+        //json = response;
+        //res.header('Access-Control-Allow-Origin', '*');
+        res.send(response);
     });
 });
 
