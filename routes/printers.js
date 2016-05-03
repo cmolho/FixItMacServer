@@ -105,24 +105,24 @@ function setWorkingAll(id,callback) {
 
 router.get('/', function(req,res) {
     getPrinters(function(request,response) {
-        json = response;
-        res.header('Access-Control-Allow-Origin', '*');
-        res.send(json);
+        //json = response;
+        //res.header('Access-Control-Allow-Origin', '*');
+        res.send(response);
     });
 });
 
 router.get('/:id', function(req,res) {
     getPrinterByID(req.params.id, function(request,response) {
-        json = response;
-        res.header('Access-Control-Allow-Origin', '*');
-        res.send(json);
+        //json = response;
+        //res.header('Access-Control-Allow-Origin', '*');
+        res.send(response);
     });
 });
 
 router.post('/:id/setissue/:issue', function(req,res) {
     setIssue(req.params.id,req.params.issue,function(request,response) {
         //json = response;
-        res.header('Access-Control-Allow-Origin', '*');
+        //res.header('Access-Control-Allow-Origin', '*');
         res.send('success');
     });
 });
@@ -130,7 +130,7 @@ router.post('/:id/setissue/:issue', function(req,res) {
 router.post('/:id/setissue/otherStatus/:description', function(req,res) {
     setIssueOther(req.params.id,req.params.description, function(request,response) {
         //json = response;
-        res.header('Access-Control-Allow-Origin', '*');
+        //res.header('Access-Control-Allow-Origin', '*');
         res.send('success');
     });
 });
@@ -141,7 +141,7 @@ router.get('/:id/setworking/:issue', function(req,res) {
     getPrinterByID(req.params.id, function(request,response) {
         printer = JSON.parse(response);
         setWorking(req.params.id,req.params.issue,function(request,response) {
-            res.header('Access-Control-Allow-Origin', '*');
+            //res.header('Access-Control-Allow-Origin', '*');
             res.render('email', {printer: printer.printerName, location: printer.printerLocation});
         });
     });
@@ -153,7 +153,7 @@ router.get('/:id/setworking', function(req,res) {
     getPrinterByID(req.params.id, function(request,response) {
         printer = JSON.parse(response);
         setWorkingAll(req.params.id,function(request,response) {
-            res.header('Access-Control-Allow-Origin', '*');
+            //res.header('Access-Control-Allow-Origin', '*');
             res.render('email', {printer: printer.printerName, location: printer.printerLocation});
         });
     });
