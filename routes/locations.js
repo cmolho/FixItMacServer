@@ -8,7 +8,7 @@ var router = express.Router();
 //================
 
 var mysql = require('mysql');
-var creds = require('./credentials.json').aws;
+var creds = require('./credentials.js').aws;
 
 var connection = mysql.createPool(creds);
 
@@ -16,10 +16,8 @@ var connection = mysql.createPool(creds);
 function getLocations(callback) {
     connection.query('SELECT * FROM `locationCategory`',  function(err, results, fields) {
         if (err) {
-            //console.log('Error while performing location Query: ', err);
             return callback(err,'error');
         }
-        //console.log('Successful location query');
         json = JSON.stringify(results);
         return callback(null,json);
     });
@@ -31,8 +29,6 @@ function getLocations(callback) {
 
 router.get('/', function(req,res) {
     getLocations(function(request,response) {
-        //json = response;
-        //res.header('Access-Control-Allow-Origin', '*');
         res.send(response);
     });
 });

@@ -8,7 +8,7 @@ var nodemailer = require('nodemailer');
 // nodemailer functions
 //================
 
-var creds = require('./credentials.json').gmail;
+var creds = require('./credentials.js').gmail;
 
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport("SMTP",{

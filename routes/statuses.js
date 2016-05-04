@@ -8,17 +8,15 @@ var router = express.Router();
 //================
 
 var mysql = require('mysql');
-var creds = require('./credentials.json').aws;
+var creds = require('./credentials.js').aws;
 
 var connection = mysql.createPool(creds);
 
 function getStatuses(callback) {
     connection.query('SELECT * FROM `status`',  function(err, results, fields) {
         if (err) {
-            //console.log('Error while performing status Query: ', err);
             return callback(err,'error');
         }
-        //console.log('Successful status query: \tAll Statuses');
         json = JSON.stringify(results);
         return callback(null,json);
     });
@@ -27,10 +25,8 @@ function getStatuses(callback) {
 function getStatusByID(id, callback) {
     connection.query('SELECT * FROM `status` WHERE printerID = ?', [id], function(err, results, fields) {
         if (err) {
-            //console.log('Error while performing status Query: ', err);
             return callback(err,'error');
         }
-        //console.log('Successful status query: \tPrinter #', id);
         json = JSON.stringify(results[0]);
         return callback(null,json);
     });
@@ -42,16 +38,12 @@ function getStatusByID(id, callback) {
 
 router.get('/', function(req,res) {
     getStatuses(function(request,response) {
-        //json = response;
-        //res.header('Access-Control-Allow-Origin', '*');
         res.send(response);
     });
 });
 
 router.get('/:id', function(req,res) {
     getStatusByID(req.params.id, function(request,response) {
-        //json = response;
-        //res.header('Access-Control-Allow-Origin', '*');
         res.send(response);
     });
 });
